@@ -5,6 +5,9 @@ import numpy as np
 def question06(numServers, targetServer, times):
   # modify and then return the variable below
   answer = -1
+  if numServers == 0:
+    answer = -1
+    return answer
   sommetList = [i for i in range(numServers)]
   # infinity is the sum of every time in the graph
   infinity = sum([sum(l) for l in times])
@@ -15,6 +18,7 @@ def question06(numServers, targetServer, times):
   visited = [0]
   for node in sommetList:
       if node not in visited:
+        # IndexError: list index out of range (graph[0][node] I presume)
         djikstra[node] = min(djikstra[node], djikstra[0] + graph[0][node])
   # find the node
   while len(visited) < numServers:
