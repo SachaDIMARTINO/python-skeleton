@@ -4,7 +4,7 @@ import numpy as np
 
 def question05(allowedAllocations, totalValue):
   # modify and then return the variable below
-  answer = 20001
+  answer = -1
   X = sorted(allowedAllocations, reverse = True)
   for i in range(len(X)):
     res = [X[i]]
@@ -21,6 +21,9 @@ def question05(allowedAllocations, totalValue):
           i += 1
       else:
         i += 1
-    if sum(res) == totalValue and len(res) < answer:
+    if sum(res) == totalValue and (len(res) < answer or answer < 0):
       answer = len(res)
   return answer
+
+# ERROR: Timed out. test must be < 1 sec
+# ERROR: 31/100 are incorrect. Then I changed answer = -1 instead of 20001
