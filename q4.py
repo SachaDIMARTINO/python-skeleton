@@ -16,5 +16,5 @@ def question04(rows, numberMachines):
         if sum(shortRow) < answer:
           answer = sum(shortRow)
   if answer == 20001:
-    return 0
+    answer = 0
   return answer
