@@ -6,6 +6,8 @@ import operator
 def question03(numNodes, edgeList):
   # modify and then return the variable below
   answer = -1
+  if edgeList == []:
+    return numNodes
   colorationList = coloration(numNodes, edgeList)
   nb_colors = dict()
   for color in colorationList:
@@ -28,7 +30,7 @@ def coloration(numNodes, edgeList):
   for node in nodeList:
     d[node] = []
     for elt in edgeList:
-      if elt[0] == node:
+      if elt[0] == node:    # ERROR: Key error: 0
         d[node].append(elt[1])
       if elt[1] == node:
         d[node].append(elt[0])
@@ -59,13 +61,14 @@ def coloration(numNodes, edgeList):
       node_to_color = potential_nodes[0]
     # prendre celui au plus haut degre
     else:
-      highest_degre = 0
-      node_to_color = 0
+      highest_degre = -1
+      node_to_color = 1
       for node in potential_nodes:
         if degreDict[node] > highest_degre:
           highest_degre = degreDict[node]
           node_to_color = node
     # trouver la coloration minimale a ce noeud
+    # ERROR: KeyError: 0
     voisins_node_to_color = d[node_to_color]
     color = 1
     # faut la liste des couleurs des voisins
