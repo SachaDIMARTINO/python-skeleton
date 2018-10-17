@@ -1,93 +1,93 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
 import numpy as np
-import operator
 
 def question03(numNodes, edgeList):
   # modify and then return the variable below
   answer = -1
-  if edgeList == []:
-    return numNodes
   colorationList = coloration(numNodes, edgeList)
-  nb_colors = dict()
-  for color in colorationList:
-    if color not in nb_colors:
-      nb_colors[color] = 1
-    else:
-      nb_colors[color] += 1
-  nb_colors_sorted = sorted(nb_colors.items(), key=operator.itemgetter(1), reverse = True)
-  # couleur qui apparait le plus est: nb_colors_sorted[0][0]
-  X = nb_colors_sorted[0][1]
-  Y = numNodes - X
-  answer = X - Y
+  color = 1
+  colorNumberList = []
+  while color in colorationList:
+    colorNumberList.append(colorationList.count(color))
+    color += 1
+  answer = 2 * max(colorNumberList) - numNodes
   return answer
 
 def coloration(numNodes, edgeList):
-  # modify and then return the variable below
-  answer = -1
-  nodeList = [i+1 for i in range(numNodes)]
-  d = dict()
+  edgeListAdj = []
+  for i in range(len(edgeList)):
+    edgeListAdj.append((edgeList[i][0] - 1, edgeList[i][1] - 1))
+  nodeList = [i for i in range(numNodes)]
+
+  voisinsDict = dict()
   for node in nodeList:
-    d[node] = []
-    for elt in edgeList:
-      elt = list(elt)
-      if elt[0] == node:    # ERROR: Key error: 0
-        d[node].append(elt[1])
-      if elt[1] == node:
-        d[node].append(elt[0])
+      voisinsDict[node] = []
+      for elt in edgeListAdj:
+        if elt[0] == node and elt[1] != node:    # ERROR: Key error: 0
+          voisinsDict[node].append(elt[1])
+        if elt[1] == node and elt[0] != node:
+          voisinsDict[node].append(elt[0])
+
   degreDict = dict()
   for node in nodeList:
-    degreDict[node] = len(d[node])
-  degreSorted = sorted(degreDict.items(), key=operator.itemgetter(1), reverse = True)
-  # Coloration
+    degreDict[node] = len(voisinsDict[node])
+
+  coloration = [0 for _ in range(len(nodeList))]
   currentColor = 1
-  coloration = [0 for node in nodeList]
   nonVisited = [node for node in nodeList]
-  coloration[degreSorted[0][0]-1] = 1 # premier sommet colore
-  nonVisited.remove(degreSorted[0][0])
-  
+
+  # Coloration du premier sommet, celui de plus haut degre
+  highestDegre = -1
+  nodeToColor = 0
+  for node in nodeList:
+    if degreDict[node] > highestDegre:
+      highestDegre = degreDict[node]
+      nodeToColor = node
+  coloration[nodeToColor] = 1
+  nonVisited.remove(nodeToColor)
+
+  # Tant qu on a pas visite tous les sommets
   while len(nonVisited) > 0:
-    # Find highest DSAT in nonVisited
+    # Choisir un sommet NON VISITE avec un DSAT maximum
+    # En cas d egalite, prendre celui avec le degre maximum
     DSATList = []
     for node in nonVisited:
-      DSATList.append((node, DSAT(node, d, coloration)))
+      DSATList.append((node, DSAT(node, voisinsDict[node], coloration)))
     DSATList = sorted(DSATList, key = func, reverse = True)
-    highest_DSAT = DSATList[0][1]
-    potential_nodes = [] # Tous les noeuds ayant le max DSAT
-    for elt in DSATList:
-      if elt[1] == highest_DSAT:
-        potential_nodes.append(elt[0])
+    highestDSAT = DSATList[0][1]
+    potentialNodes = []
+    i = 0
+    while i < len(DSATList) and DSATList[i][1] == highestDSAT:
+      potentialNodes.append(DSATList[i][0])
+      i += 1
     # si highest_DSAT unique alors c'est le noeud a colorer
-    if len(potential_nodes) == 1:
-      node_to_color = potential_nodes[0]
-    # prendre celui au plus haut degre
+    if len(potentialNodes) == 1:
+      nodeToColor = potentialNodes[0]
     else:
-      highest_degre = -1
-      node_to_color = 1
-      for node in potential_nodes:
-        if degreDict[node] > highest_degre:
-          highest_degre = degreDict[node]
-          node_to_color = node
-    # trouver la coloration minimale a ce noeud
-    # ERROR: KeyError: 0
-    voisins_node_to_color = d[node_to_color]
+      highestDegre = -1
+      nodeToColor = 0
+      for node in potentialNodes:
+        if degreDict[node] > highestDegre:
+          highestDegre = degreDict[node]
+          nodeToColor = node
+    # Trouver la coloration minimale a ce noeud
     color = 1
     # faut la liste des couleurs des voisins
-    voisins_color_list = []
-    for node in voisins_node_to_color:
-      voisins_color_list.append(coloration[node-1])
-    while color in voisins_color_list:
+    voisinsColorList = []
+    for node in voisinsDict[nodeToColor]:
+      voisinsColorList.append(coloration[node])
+    while color in voisinsColorList:
       color += 1
-    coloration[node_to_color-1] = color
-    nonVisited.remove(node_to_color)
+    coloration[nodeToColor] = color
+    nonVisited.remove(nodeToColor)
   return coloration
 
-def DSAT(node, edgeDict, coloration):
-  uniqueColor = []
-  for elt in edgeDict[node]:
-    uniqueColor.append(coloration[elt-1])
-  uniqueColor = set(uniqueColor)
-  return len(uniqueColor)
+def DSAT(sommet, voisinList, coloration):
+  colors = []
+  for voisin in voisinList:
+    colors.append(coloration[voisin])
+  return len(set(colors))
 
 def func(x):
   return x[1]
