@@ -14,9 +14,9 @@ def question01(portfolios):
   return answer
 
 def bitfield(n):
-    X = np.array([1 if digit=='1' else 0 for digit in bin(n)[2:]])
-    Y = np.array([0 for _ in range(16-len(X))])
-    return np.concatenate((Y,X))
+  X = np.array([1 if digit=='1' else 0 for digit in bin(n)[2:]])
+  Y = np.array([0 for _ in range(16-len(X))])
+  return np.concatenate((Y,X))
 
 def merge_portfolios(p1, p2):
   X2 = bitfield(p2)
