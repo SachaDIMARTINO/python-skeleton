@@ -11,7 +11,39 @@ def question03(numNodes, edgeList):
   while color in colorationList:
     colorNumberList.append(colorationList.count(color))
     color += 1
-  answer = 2 * max(colorNumberList) - numNodes
+  # maxColor = couleur la plus presente
+  maxColor = colorNumberList.index(max(colorNumberList)) + 1
+  X = max(colorNumberList)
+  TE = []
+  NTE = []
+  for node in range(numNodes):
+    if colorationList[node] == maxColor:
+      TE.append(node)
+    else:
+      NTE.append(node)
+
+  # Besoin de connaitre les voisins des noeuds de NTE
+  edgeListAdj = []
+  for i in range(len(edgeList)):
+    edgeListAdj.append((edgeList[i][0] - 1, edgeList[i][1] - 1))
+  nodeList = [i for i in range(numNodes)]
+  voisinsDict = dict()
+  for node in nodeList:
+      voisinsDict[node] = []
+      for elt in edgeListAdj:
+        if elt[0] == node and elt[1] != node:    # ERROR: Key error: 0
+          voisinsDict[node].append(elt[1])
+        if elt[1] == node and elt[0] != node:
+          voisinsDict[node].append(elt[0])
+
+  Y = 0
+  for node in NTE:
+    relationship = False
+    for voisin in voisinsDict[node]:
+      if voisin in TE:
+        relationship = True
+    Y += int(relationship)
+  answer = X - Y
   return answer
 
 def coloration(numNodes, edgeList):
