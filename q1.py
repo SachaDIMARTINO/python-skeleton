@@ -7,9 +7,11 @@ def question01(portfolios):
   # modify and then return the variable below
   answer = 0
   for i in range(len(portfolios)):
-    for j in range(i+1, len(portfolios)):
-      if merge_portfolios(portfolios[i], portfolios[j]) > answer:
-        answer = merge_portfolios(portfolios[i], portfolios[j])
+    #for j in range(i+1, len(portfolios)):
+    for j in range(len(portfolios)):
+      tmp = merge_portfolios(portfolios[i], portfolios[j])
+      if tmp > answer:
+        answer = tmp
   return answer
 
 def bitfield(n):
@@ -31,3 +33,5 @@ def merge_portfolios(p1, p2):
   return counter
 
 # HOW TO AVOID THE 2 FOR LOOPS... ?
+#print(question01([15, 8, 6, 7, 5]))
+#print(question01bis([9, 7, 12, 2]))
