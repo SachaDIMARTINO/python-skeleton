@@ -8,7 +8,7 @@ def question05(allowedAllocations, totalValue):
   X = sorted(allowedAllocations, reverse = True)
   for i in range(len(X)):
     res = [X[i]]
-    while sum(res) < totalValue and i < len(X):
+    while sum(res) < totalValue and i < len(X) and (len(res) < answer or answer < 0):
       if X[i] > 0:
         if totalValue % X[i] == 0:
           if sum(res) + X[i] <= totalValue:
@@ -27,3 +27,5 @@ def question05(allowedAllocations, totalValue):
 
 # ERROR: Timed out. test must be < 1 sec
 # ERROR: 31/100 are incorrect. Then I changed answer = -1 instead of 20001
+# last update: if len(res) >= answer it is not necessary to continue the while
+# loop
