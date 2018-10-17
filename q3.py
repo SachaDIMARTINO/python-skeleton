@@ -30,6 +30,7 @@ def coloration(numNodes, edgeList):
   for node in nodeList:
     d[node] = []
     for elt in edgeList:
+      elt = list(elt)
       if elt[0] == node:    # ERROR: Key error: 0
         d[node].append(elt[1])
       if elt[1] == node:
