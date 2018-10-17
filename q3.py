@@ -25,7 +25,7 @@ def question03(numNodes, edgeList):
   # Besoin de connaitre les voisins des noeuds de NTE
   edgeListAdj = []
   for i in range(len(edgeList)):
-    edgeListAdj.append((edgeList[i][0] - 1, edgeList[i][1] - 1))
+    edgeListAdj.append((list(edgeList[i])[0] - 1, list(edgeList[i])[1] - 1))
   nodeList = [i for i in range(numNodes)]
   voisinsDict = dict()
   for node in nodeList:
@@ -49,7 +49,7 @@ def question03(numNodes, edgeList):
 def coloration(numNodes, edgeList):
   edgeListAdj = []
   for i in range(len(edgeList)):
-    edgeListAdj.append((edgeList[i][0] - 1, edgeList[i][1] - 1))
+    edgeListAdj.append((list(edgeList[i])[0] - 1, list(edgeList[i])[1] - 1))
   nodeList = [i for i in range(numNodes)]
 
   voisinsDict = dict()
