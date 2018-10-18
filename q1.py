@@ -6,6 +6,8 @@ import numpy as np
 def question01(portfolios):
   # modify and then return the variable below
   answer = -1
+  if len(portfolios) == 0:
+    return answer
   if len(portfolios) > 100 or max(portfolios) >= 2**16:
     return answer
   for i in range(len(portfolios)-1):
