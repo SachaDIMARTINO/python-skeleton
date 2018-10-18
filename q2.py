@@ -32,6 +32,25 @@ def question02(cashflow_in, cashflow_out):
   answer = output
   return answer
 
+def isSubsetSum (arr, n, summ): 
+    # Base Cases 
+    if summ == 0: 
+        return True
+    if n == 0 and summ != 0: 
+        return False
+  
+    # If last element is greater than sum, then  
+    # ignore it 
+    if arr[n-1] > summ: 
+        return isSubsetSum (arr, n-1, summ) 
+  
+    ''' else, check if sum can be obtained by any of  
+    the following 
+    (a) including the last element 
+    (b) excluding the last element'''
+      
+    return isSubsetSum (arr, n-1, summ) or isSubsetSum (arr, n-1, summ-arr[n-1])
+
 from itertools import chain, combinations
 def powerset(iterable):
     """
@@ -40,3 +59,5 @@ def powerset(iterable):
     xs = list(iterable)
     # note we return an iterator rather than a list
     return chain.from_iterable(combinations(xs,n) for n in range(len(xs)+1))
+
+#print(question02([72, 24, 73, 4, 28, 56, 1, 43], [27]))
