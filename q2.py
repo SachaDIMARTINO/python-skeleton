@@ -26,9 +26,9 @@ def question02(cashflow_in, cashflow_out):
       test = True
   while test == False:
     output += 1
-      for subset in powerSet[1:]:
-        if isSubsetSum(longList, len(longList), sum(subset) + output) or isSubsetSum(longList, len(longList), sum(subset) - output):
-          test = True
+    for subset in powerSet[1:]:
+      if isSubsetSum(longList, len(longList), sum(subset) + output) or isSubsetSum(longList, len(longList), sum(subset) - output):
+        test = True
   answer = output
   return answer
 
