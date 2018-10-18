@@ -49,7 +49,7 @@ def question03(numNodes, edgeList):
 def coloration(numNodes, edgeList):
   edgeListAdj = []
   for i in range(len(edgeList)):
-    edgeListAdj.append((list(edgeList[i])[0] - 1, list(edgeList[i])[1] - 1))
+    edgeListAdj.append((int(list(edgeList[i])[0]) - 1, int(list(edgeList[i])[1]) - 1)) # is it working
   nodeList = [i for i in range(numNodes)]
 
   voisinsDict = dict()

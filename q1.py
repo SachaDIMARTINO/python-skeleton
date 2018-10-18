@@ -1,16 +1,16 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-import numpy as np
+#import numpy as np
 
 # modify this function, and create other functions below as you wish
 def question01(portfolios):
   # modify and then return the variable below
   answer = -1
-  for i in range(len(portfolios)):
+  for i in range(len(portfolios)-1):
     for j in range(i+1, len(portfolios)):
       X1 = bitfield(portfolios[i])
       X2 = bitfield(portfolios[j])
-      C = [X1[i] ^ X2[i] for i in range(16)]
+      C = [X1[k] ^ X2[k] for k in range(16)]
       answer = max(answer, intfield(C))
   return answer
 
