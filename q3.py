@@ -1,6 +1,6 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-import numpy as np
+#import numpy as np
 
 def question03(numNodes, edgeList):
   # modify and then return the variable below
@@ -25,7 +25,6 @@ def question03(numNodes, edgeList):
   # Besoin de connaitre les voisins des noeuds de NTE
   edgeListAdj = []
   for i in range(len(edgeList)):
-    print(edgeList[i])
     edgeListAdj.append((int(list(edgeList[i])[0]) - 1, int(list(edgeList[i])[1]) - 1)) #IS IT WORKING
   nodeList = [i for i in range(numNodes)]
   voisinsDict = dict()
@@ -49,8 +48,14 @@ def question03(numNodes, edgeList):
 
 def coloration(numNodes, edgeList):
   edgeListAdj = []
-  for i in range(len(edgeList)):
-    edgeListAdj.append((int(list(edgeList[i])[0]) - 1, int(list(edgeList[i])[1]) - 1)) # is it working
+  for edge in edgeList:
+    sourceDestination = []
+    for elt in edge:
+      if type(elt) == int:
+        sourceDestination.append(elt)
+    source = sourceDestination[0]
+    destination = sourceDestination[1]
+    edgeListAdj.append((source - 1, destination - 1)) # is it working v2
   nodeList = [i for i in range(numNodes)]
 
   voisinsDict = dict()
@@ -124,4 +129,3 @@ def DSAT(sommet, voisinList, coloration):
 
 def func(x):
   return x[1]
-
