@@ -1,6 +1,6 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-#import numpy as np
+import numpy as np
 
 # modify this function, and create other functions below as you wish
 def question01(portfolios):
