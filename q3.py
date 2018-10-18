@@ -25,6 +25,7 @@ def question03(numNodes, edgeList):
   # Besoin de connaitre les voisins des noeuds de NTE
   edgeListAdj = []
   for i in range(len(edgeList)):
+    print(edgeList[i])
     edgeListAdj.append((int(list(edgeList[i])[0]) - 1, int(list(edgeList[i])[1]) - 1)) #IS IT WORKING
   nodeList = [i for i in range(numNodes)]
   voisinsDict = dict()
