@@ -18,11 +18,11 @@ def question01(portfolios):
 
 def bitfield(n):
   X = [1 if digit=='1' else 0 for digit in bin(n)[2:]]
-  Y = [0 for _ in range(16-len(X))]
+  Y = [0 for m in range(16-len(X))]
   return Y + X
 
 def intfield(L):
   counter = 0
-  for i in range(16):
-    counter += L[15-i] * 2**i
+  for l in range(16):
+    counter += L[15-l] * 2**l
   return counter
