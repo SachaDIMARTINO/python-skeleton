@@ -5,6 +5,7 @@
 def question03(numNodes, edgeList):
   # modify and then return the variable below
   answer = -1
+  return answer
   for edge in edgeList:
     source = edge[0] # IT SHOULD WORK
     destination = edge[1] # IT SHOULD WORK
