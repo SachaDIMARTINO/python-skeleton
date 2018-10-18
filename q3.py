@@ -5,9 +5,6 @@
 def question03(numNodes, edgeList):
   # modify and then return the variable below
   answer = -1
-  for edge in edgeList:
-    source = edge[0] # IT SHOULD WORK
-    destination = edge[1] # IT SHOULD WORK
   colorationList = coloration(numNodes, edgeList)
   color = 1
   colorNumberList = []
@@ -26,18 +23,16 @@ def question03(numNodes, edgeList):
       NTE.append(node)
 
   # Besoin de connaitre les voisins des noeuds de NTE
-  edgeListAdj = []
-  for i in range(len(edgeList)):
-    edgeListAdj.append((int(list(edgeList[i])[0]) - 1, int(list(edgeList[i])[1]) - 1)) #IS IT WORKING
+  edgeListAdj = [(x-1, y-1) for x,y in edgeList]
   nodeList = [i for i in range(numNodes)]
   voisinsDict = dict()
   for node in nodeList:
       voisinsDict[node] = []
-      for elt in edgeListAdj:
-        if elt[0] == node and elt[1] != node:    # ERROR: Key error: 0
-          voisinsDict[node].append(elt[1])
-        if elt[1] == node and elt[0] != node:
-          voisinsDict[node].append(elt[0])
+      for elt0, elt1 in edgeListAdj:
+        if elt0 == node and elt1 != node:    # ERROR: Key error: 0
+          voisinsDict[node].append(elt1)
+        if elt1 == node and elt0 != node:
+          voisinsDict[node].append(elt0)
 
   Y = 0
   for node in NTE:
@@ -50,25 +45,17 @@ def question03(numNodes, edgeList):
   return answer
 
 def coloration(numNodes, edgeList):
-  edgeListAdj = []
-  for edge in edgeList:
-    sourceDestination = []
-    for elt in edge:
-      if type(elt) == int:
-        sourceDestination.append(elt)
-    source = sourceDestination[0]
-    destination = sourceDestination[1]
-    edgeListAdj.append((source - 1, destination - 1)) # is it working v2
+  edgeListAdj = [(x-1, y-1) for x,y in edgeList]
   nodeList = [i for i in range(numNodes)]
 
   voisinsDict = dict()
   for node in nodeList:
       voisinsDict[node] = []
-      for elt in edgeListAdj:
-        if elt[0] == node and elt[1] != node:    # ERROR: Key error: 0
-          voisinsDict[node].append(elt[1])
-        if elt[1] == node and elt[0] != node:
-          voisinsDict[node].append(elt[0])
+      for elt0, elt1 in edgeListAdj:
+        if elt0 == node and elt1 != node:    # ERROR: Key error: 0
+          voisinsDict[node].append(elt1)
+        if elt1 == node and elt0 != node:
+          voisinsDict[node].append(elt0)
 
   degreDict = dict()
   for node in nodeList:

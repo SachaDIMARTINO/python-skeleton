@@ -59,5 +59,3 @@ def powerset(iterable):
     xs = list(iterable)
     # note we return an iterator rather than a list
     return chain.from_iterable(combinations(xs,n) for n in range(len(xs)+1))
-
-#print(question02([72, 24, 73, 4, 28, 56, 1, 43], [27]))
