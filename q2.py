@@ -30,6 +30,7 @@ def question02(cashflow_in, cashflow_out):
       if isSubsetSum(longList, len(longList), sum(subset) + output) or isSubsetSum(longList, len(longList), sum(subset) - output):
         test = True
   answer = output
+  answer = min(answer, min(cashflow_in), min(cashflow_out))
   return answer
 
 def isSubsetSum (arr, n, summ): 
@@ -59,3 +60,6 @@ def powerset(iterable):
     xs = list(iterable)
     # note we return an iterator rather than a list
     return chain.from_iterable(combinations(xs,n) for n in range(len(xs)+1))
+
+# cin = [72], cout = [27] must return 27, not 45...
+# cin = [72, 1], cout = [27] must return 1, not 26...
