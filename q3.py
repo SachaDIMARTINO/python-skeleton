@@ -125,16 +125,16 @@ def func(x):
 def realEdgeList(numNodes, edgeList):
   d = dict()
   counter = 0
-  for edge in edgeList:
-    if edge[0] not in d:
-      d[edge[0]] = counter
+  for elt0, elt1 in edgeList:
+    if elt0 not in d:
+      d[elt0] = counter
       counter += 1
-    if edge[1] not in d:
-      d[edge[1]] = counter
+    if elt1 not in d:
+      d[elt1] = counter
       counter += 1
   newEdgeList = []
-  for edge in edgeList:
-    newEdgeList.append((d[edge[0]], d[edge[1]]))
+  for elt0, elt1 in edgeList:
+    newEdgeList.append((d[elt0], d[elt1]))
   return newEdgeList
 
 # peut avoir des pb: entre les nodes de nodeList et ceux de realEdgeList
