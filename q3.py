@@ -122,7 +122,7 @@ def DSAT(sommet, voisinList, coloration):
 def func(x):
   return x[1]
 
-def realEdgeList(numNodes, edgeList):
+def realEdgeList2(numNodes, edgeList):
   d = dict()
   counter = 0
   for elt0, elt1 in edgeList:
@@ -137,4 +137,16 @@ def realEdgeList(numNodes, edgeList):
     newEdgeList.append((d[elt0], d[elt1]))
   return newEdgeList
 
+def realEdgeList(numNodes, edgeList):
+  newList = []
+  for edge in edgeList:
+    newList.append((list(edge.values())[0] - 1, list(edge.values())[1] - 1))
+  return newList
+
 # peut avoir des pb: entre les nodes de nodeList et ceux de realEdgeList
+# si on a: ValueError: too many values to unpack
+# c est que edgeList est un dictionnaire...
+#numnodes = 5
+#edgelist = [{'edgeA': 1, 'edgeB': 2}, {'edgeA': 1, 'edgeB': 3}, {'edgeA': 1, 'edgeB': 4}, {'edgeA': 1, 'edgeB': 5}]
+#edgelist = [{'edgeA': 1, 'edgeB': 3}, {'edgeA': 1, 'edgeB': 4}, {'edgeA': 1, 'edgeB': 5}, {'edgeA': 2, 'edgeB': 3}, {'edgeA': 2, 'edgeB': 4}, {'edgeA': 2, 'edgeB': 5}] 
+#print(question03(numnodes, edgelist))
