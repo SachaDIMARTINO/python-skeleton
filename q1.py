@@ -1,23 +1,27 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-import numpy as np
+# import numpy as np
 
 # modify this function, and create other functions below as you wish
 def question01(portfolios):
   # modify and then return the variable below
   answer = -1
+  answer = []
   if len(portfolios) == 0:
     answer = 0
     return answer
   if len(portfolios) > 100 or max(portfolios) >= 2**16:
+    answer = 0
     return answer
   for i in range(len(portfolios)-1):
     for j in range(i+1, len(portfolios)):
       X1 = bitfield(portfolios[i])
       X2 = bitfield(portfolios[j])
       C = [X1[k] ^ X2[k] for k in range(16)]
-      answer = max(answer, C.count(1))
-  return answer
+      # Maximize the number of 1 inside the combined portfolio
+      if C.count(1) > answer.count(1):
+        answer = C
+  return intfield(answer)
 
 def bitfield(n):
   X = [1 if digit=='1' else 0 for digit in bin(n)[2:]]
