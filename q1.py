@@ -16,7 +16,7 @@ def question01(portfolios):
       X1 = bitfield(portfolios[i])
       X2 = bitfield(portfolios[j])
       C = [X1[k] ^ X2[k] for k in range(16)]
-      answer = max(answer, intfield(C))
+      answer = max(answer, C.count(1))
   return answer
 
 def bitfield(n):
