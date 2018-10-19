@@ -23,7 +23,8 @@ def question03(numNodes, edgeList):
       NTE.append(node)
 
   # Besoin de connaitre les voisins des noeuds de NTE
-  edgeListAdj = [(int(x)-1, int(y)-1) for x,y in edgeList]
+  #edgeListAdj = [(int(x)-1, int(y)-1) for x,y in edgeList]
+  edgeListAdj = realEdgeList(numNodes, edgeList)
   nodeList = [i for i in range(numNodes)]
   voisinsDict = dict()
   for node in nodeList:
@@ -45,7 +46,8 @@ def question03(numNodes, edgeList):
   return answer
 
 def coloration(numNodes, edgeList):
-  edgeListAdj = [(int(y)-1, int(x)-1) for x,y in edgeList]
+  #edgeListAdj = [(int(x)-1, int(y)-1) for x,y in edgeList]
+  edgeListAdj = realEdgeList(numNodes, edgeList)
   nodeList = [i for i in range(numNodes)]
 
   voisinsDict = dict()
@@ -119,3 +121,20 @@ def DSAT(sommet, voisinList, coloration):
 
 def func(x):
   return x[1]
+
+def realEdgeList(numNodes, edgeList):
+  d = dict()
+  counter = 0
+  for edge in edgeList:
+    if edge[0] not in d:
+      d[edge[0]] = counter
+      counter += 1
+    if edge[1] not in d:
+      d[edge[1]] = counter
+      counter += 1
+  newEdgeList = []
+  for edge in edgeList:
+    newEdgeList.append((d[edge[0]], d[edge[1]]))
+  return newEdgeList
+
+# peut avoir des pb: entre les nodes de nodeList et ceux de realEdgeList
