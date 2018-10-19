@@ -45,7 +45,7 @@ def question03(numNodes, edgeList):
   return answer
 
 def coloration(numNodes, edgeList):
-  edgeListAdj = [(int(x)-1, int(y)-1) for x,y in edgeList]
+  edgeListAdj = [(int(y)-1, int(x)-1) for x,y in edgeList]
   nodeList = [i for i in range(numNodes)]
 
   voisinsDict = dict()
