@@ -7,10 +7,8 @@ def question01(portfolios):
   # modify and then return the variable below
   answer = -1
   if len(portfolios) == 0:
-    answer = 0
     return answer
   if len(portfolios) > 100 or max(portfolios) >= 2**16 or min(portfolios) < 0:
-    answer = 0
     return answer
   for i in range(len(portfolios)-1):
     for j in range(i+1, len(portfolios)):
@@ -33,7 +31,7 @@ def intfield(L):
     counter += L[15-l] * 2**l
   return counter
 
-print(question01([15,7,8,6]))
+#print(question01([15,7,8,6]))
 """
 I try C = merge(A,B) with
 A = 15, B = 7
