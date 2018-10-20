@@ -6,12 +6,12 @@
 def question01(portfolios):
   # modify and then return the variable below
   answer = -1
-  if len(portfolios) == 0:
+  if len(portfolios) < 2:
     return answer
   if len(portfolios) > 100 or max(portfolios) >= 2**16 or min(portfolios) < 0:
     return answer
   tri = sorted(portfolios, reverse = True)
-  maxElt = max(tri)
+  maxElt = tri[0]
   maxList = []
   minList = []
   try:
@@ -45,14 +45,3 @@ def intfield(L):
   for l in range(16):
     counter += L[15-l] * 2**l
   return counter
-
-#print(question01([15,7,8,6]))
-"""
-I try C = merge(A,B) with
-A = 15, B = 7
-A = 15, B = 8
-A = 15, B = 6
-A = 7 , B = 8
-A = 7 , B = 6
-A = 8 , B = 6
-"""
