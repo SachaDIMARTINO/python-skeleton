@@ -1,6 +1,6 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-# import numpy as np
+import numpy as np
 
 # modify this function, and create other functions below as you wish
 def question01(portfolios):
@@ -9,6 +9,7 @@ def question01(portfolios):
   if len(portfolios) < 2:
     return answer
   if len(portfolios) > 100 or max(portfolios) >= 2**16 or min(portfolios) < 0:
+    answer = 0
     return answer
   tri = sorted(portfolios, reverse = True)
   maxElt = tri[0]
