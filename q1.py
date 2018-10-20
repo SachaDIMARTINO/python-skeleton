@@ -7,6 +7,18 @@ def question01(portfolios):
   # modify and then return the variable below
   portfolios = list(portfolios)
   answer = -1
+  if len(portfolios) == 0:
+    answer = 0
+    return answer
+  if len(portfolios) == 1:
+    answer = portfolios[0]
+    return answer
+  if len(portfolios) > 100 or max(portfolios) >= 2**16:
+    answer = 0
+    return answer
+  for i in range(len(portfolios)):
+    if portfolios[i] <= 0:
+      portfolios[i] = 0
   tri = sorted(portfolios, reverse = True)
   maxElt = tri[0]
   maxList = []
