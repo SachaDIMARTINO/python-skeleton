@@ -8,6 +8,7 @@ def question01(portfolios):
   portfolios = list(portfolios)
   answer = -1
   if len(portfolios) < 2:
+    answer = 0
     return answer
   if len(portfolios) > 100 or max(portfolios) >= 2**16 or min(portfolios) < 0:
     answer = 0
