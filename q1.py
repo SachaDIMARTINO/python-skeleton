@@ -17,8 +17,7 @@ def question01(portfolios):
     answer = 0
     return answer
   for i in range(len(portfolios)):
-    if portfolios[i] <= 0:
-      portfolios[i] = 0
+    portfolios[i] = abs(portfolios[i])
   tri = sorted(portfolios, reverse = True)
   maxElt = tri[0]
   maxList = []
