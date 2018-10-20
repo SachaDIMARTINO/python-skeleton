@@ -5,6 +5,7 @@ import numpy as np
 # modify this function, and create other functions below as you wish
 def question01(portfolios):
   # modify and then return the variable below
+  portfolios = list(portfolios)
   answer = -1
   if len(portfolios) < 2:
     return answer
