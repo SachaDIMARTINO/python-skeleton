@@ -13,6 +13,24 @@ def question01(portfolios):
   if len(portfolios) == 1:
     answer = portfolios[0]
     return answer
+  for i in range(len(portfolios)-1):
+    for j in range(i+1, len(portfolios)):
+      answer = max(answer, portfolios[i] ^ portfolios[j])
+  return answer
+
+
+"""
+# modify this function, and create other functions below as you wish
+def question01(portfolios):
+  # modify and then return the variable below
+  portfolios = list(portfolios)
+  answer = -1
+  if len(portfolios) == 0:
+    answer = 0
+    return answer
+  if len(portfolios) == 1:
+    answer = portfolios[0]
+    return answer
   if len(portfolios) > 100 or max(portfolios) >= 2**16:
     answer = 0
     return answer
@@ -53,3 +71,4 @@ def intfield(L):
   for l in range(16):
     counter += L[15-l] * 2**l
   return counter
+"""
