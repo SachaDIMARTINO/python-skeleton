@@ -1,7 +1,8 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-import numpy as np
+#import numpy as np
 
+"""
 # modify this function, and create other functions below as you wish
 def question01(portfolios):
   # modify and then return the variable below
@@ -13,19 +14,13 @@ def question01(portfolios):
   #[[i ^ j for j in range(i+1, len(portfolios))] for i in range(len(portfolios)-1)]
   answer = max([portfolios[i] ^ portfolios[j] for i in range(len(portfolios)-1) for j in range(i+1, len(portfolios))])
   return answer
-
 """
+
 def question01(portfolios):
   # modify and then return the variable below
   portfolios = list(portfolios)
   answer = -1
-  if len(portfolios) == 0:
-    answer = 0
-    return answer
-  if len(portfolios) == 1:
-    answer = portfolios[0]
-    return answer
-  if max(portfolios) == 0:
+  if len(portfolios) < 2 or max(portfolios) == 0:
     answer = 0
     return answer
 
@@ -40,4 +35,3 @@ def question01(portfolios):
     for j in minList:
       answer = max(answer, i ^ j)
   return answer
-"""
