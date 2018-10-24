@@ -1,11 +1,11 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-import numpy as np
+#import numpy as np
 
 def question05(allowedAllocations, totalValue):
   # modify and then return the variable below
   answer = 0
-  X = sorted(allowedAllocations, reverse = True)
+  X = sorted(set(allowedAllocations), reverse = True)
   for i in range(len(X)):
     res = [X[i]]
     while sum(res) < totalValue and i < len(X) and (len(res) < answer or answer < 1):
