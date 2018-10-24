@@ -4,8 +4,7 @@
 def question01(portfolios):
   # modify and then return the variable below
   answer = 0
-  for i in range(16)[::-1]:
-    answer <<= 1
-    prefixes = {num >> i for num in portfolios}
-    answer += any(answer^1 ^ p in prefixes for p in prefixes)
+  if len(portfolios) < 2 or max(portfolios) == 0:
+    return answer
+  answer = max([portfolios[i] ^ portfolios[j] for i in range(len(portfolios)-1) for j in range(i+1, len(portfolios))])
   return answer
