@@ -1,40 +1,23 @@
 # ONLY EDIT FUNCTIONS MARKED CLEARLY FOR EDITING
 
-import numpy as np
-
 def question06(numServers, targetServer, times):
   # modify and then return the variable below
   answer = -1
   # last update: if numServers > len(times)
   if numServers == 0 or numServers > len(times):
     return answer
-  sommetList = [i for i in range(numServers)]
-  # infinity is the sum of every time in the graph
-  infinity = sum([sum(l) for l in times])
-  graph = times
-  djikstra = [infinity for _ in range(numServers)]
-  # lets visit the first node
-  djikstra[0] = graph[0][0]
-  visited = [0]
-  for node in sommetList:
-      if node not in visited:
-        # ERROR: IndexError: list index out of range (graph[0][node] I presume)
-        djikstra[node] = min(djikstra[node], djikstra[0] + graph[0][node])
-  # find the node
-  while len(visited) < numServers:
-    nextNode = findNextNode(djikstra, visited, infinity)
-    visited.append(nextNode)
-    # Pour chaque sommet B not in visited voisin de nextNode
-    for node in sommetList:
-      if node not in visited:
-        djikstra[node] = min(djikstra[node], djikstra[nextNode] + graph[nextNode][node])
-  answer = djikstra[targetServer]
-  return answer
+  return lengthPath(targetServer, times, times[targetServer][0])
 
-def findNextNode(djikstra, visited, infinity):
-  nextNode = djikstra.index(min(djikstra))
-  if nextNode not in visited:
-    return nextNode
-  djikstraTmp = djikstra[:]
-  djikstraTmp[nextNode] = infinity
-  return findNextNode(djikstraTmp, visited, infinity)
+def lengthPath(startingNode, graph, minValue, visited = []):
+    for i in range(len(graph)):
+        graph[i][i] = 2**16
+    if startingNode == 0:
+        return 0
+    visited.append(startingNode)
+    availableNodes = []
+    for i in range(len(graph[startingNode])):
+        if i not in visited and graph[startingNode][i] <= minValue:
+            availableNodes.append(i)
+    for node in availableNodes:
+        minValue = min(minValue, graph[startingNode][node] + lengthPath(node, graph, minValue, visited))
+    return minValue
